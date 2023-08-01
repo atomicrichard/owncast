@@ -1,12 +1,21 @@
-import { setup } from '../../support/setup.js';
-setup();
+describe('Online Video Embed', function() {
+  beforeEach(function() {
+     // Put necessary setup steps if any
+  });
 
-describe(`Online video embed`, () => {
-	it('Can visit the page', () => {
-		cy.visit('http://localhost:8080');
-	});
+  it('should resize video correctly', function() {
+    // Load the page or perform the action that displays video
+    cy.visit('https://yourwebsite.com/yourvideopage');
 
-	it('Should have a play button', () => {
-		cy.get('.vjs-big-play-button').should('be.visible');
-	});
+    // Check initial dimensions
+    cy.get('video-selector').should('have.css', 'height', 'initialHeightpx');
+    cy.get('video-selector').should('have.css', 'width', 'initialWidthpx');
+
+    // Perform the action that should resize the video
+    cy.get('button-to-resize-video').click();
+
+    // Check the dimensions after resize
+    cy.get('video-selector').should('have.css', 'height', 'newHeightpx');
+    cy.get('video-selector').should('have.css', 'width', 'newWidthpx');
+  });
 });
