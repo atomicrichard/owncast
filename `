@@ -1,0 +1,12 @@
+import { setup } from '../../support/setup.js';
+setup();
+
+describe('End to end test for index.tsx', () => {
+	it('Can visit the page', () => {
+		cy.visit('http://localhost:8080');
+	});
+
+	it('Should display the main component', () => {
+		cy.get('Main').should('be.visible');
+	});
+});
