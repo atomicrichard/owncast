@@ -1,0 +1,29 @@
+name: QAI_Cypress
+
+on:
+  pull_request:
+    types: [opened, synchronize, edited, ready_for_review]
+
+jobs:
+  qai_e2eTests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v3
+        env:
+          
+        with:
+          start: npm start
+          wait-on: ${{ secrets.LOCALHOST_URL }}
